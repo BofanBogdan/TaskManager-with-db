@@ -1,0 +1,59 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Task {
+  id           String     @id @default(uuid()) @map("_id")
+  title        String
+  description  String?
+  date         String
+  isCompleted  Boolean    @default(false)
+  isImportant  Boolean    @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("update_at")
+  userId   String
+ }
+
+
+// model Session {
+//   id           String   @id @default(cuid())
+//   sessionToken String   @unique
+//   userId       String
+//   expires      DateTime
+//   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+// https://authjs.dev/reference/adapter/prisma?_gl=1*1vqxzk3*_gcl_au*NDg1MzQ0NDkuMTcwODI4MDM4OC4zODgzODk0MzUuMTcwODU4MzExNC4xNzA4NTgzNjM5}
+
+// model User {
+//   id        String   @id @default(uuid())
+//   email     String   @unique
+//   name      String?
+//   password  String
+//   active    Boolean  @default(true)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   role      Role
+//   task      String
+// }
+// enum Role {
+//   USER
+//   ADMIN
+// }
+
+// enum TaskStatus {
+//   PENDING
+//   IN_PROGRESS
+//   COMPLETED
+// }
+// model VerificationToken {
+//   identifier String
+//   token      String   @unique
+//   expires    DateTime
+
+//   @@unique([identifier, token])
+// }
